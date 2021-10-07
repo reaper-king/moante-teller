@@ -1,0 +1,57 @@
+{
+    "name": "moante",
+    "productName": "moante",
+    "description": "Moante - Bookmaker Operator",
+    "author": "MarcquesMouton",
+    "license": "MIT",
+    "version": "0.0.4",
+    "main": "dist/index.js",
+    "scripts": {
+        "nodemon": "nodemon",
+        "start": "npm run compile && electron .",
+        "svelte:dev": "cd svelte && npm run dev",
+        "svelte:build": "cd svelte && npm run build",
+        "compile": "tsc",
+        "out:win": "npm run svelte:build && npm run compile && electron-builder build --win --publish never",
+        "publish:win": "npm run svelte:build && npm run compile && electron-builder build --win --publish always"
+    },
+    "devDependencies": {
+        "concurrently": "^6.2.0",
+        "electron": "^13.1.6",
+        "electron-builder": "^22.11.7",
+        "nodemon": "^2.0.12",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "@exponent/electron-cookies": "^2.0.0",
+        "electron-reload": "^1.5.0",
+        "electron-serve": "^1.1.0",
+        "electron-updater": "^4.3.9"
+    },
+    "build": {
+        "appId": "moante",
+        "directories": {
+            "output": "out"
+        },
+        "publish": [{
+            "provider": "github",
+            "owner": "reaper-king",
+            "repo": "moante-teller",
+            "token": "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"
+        }],
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "icon.ico"
+        },
+        "nsis": {
+            "installerIcon": "icon.ico",
+            "uninstallerIcon": "icon.ico",
+            "uninstallDisplayName": "moante",
+            "license": "license.txt",
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true
+        }
+    }
+}
